@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./proto;message";
+option go_package = "./proto;impl";
 //消息服务
 service SendMessage{
   rpc SendTextMsg(TextMessage) returns (Response) {}

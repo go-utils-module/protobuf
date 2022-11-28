@@ -1,4 +1,4 @@
-module protobuf
+module github.com/go-utils-module/protobuf
 
 go 1.18
 
