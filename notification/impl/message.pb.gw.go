@@ -2,11 +2,11 @@
 // source: message.proto
 
 /*
-Package console is a reverse proxy.
+Package message is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package console
+package message
 
 import (
 	"context"
