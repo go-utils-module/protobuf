@@ -2,11 +2,11 @@
 // source: message.proto
 
 /*
-Package impl is a reverse proxy.
+Package notification is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package impl
+package notification
 
 import (
 	"context"
