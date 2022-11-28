@@ -32,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 func request_SendMessage_SendTextMsg_0(ctx context.Context, marshaler runtime.Marshaler, client SendMessageClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq TextMessage
+	var protoReq TextMessageRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -49,7 +49,7 @@ func request_SendMessage_SendTextMsg_0(ctx context.Context, marshaler runtime.Ma
 }
 
 func local_request_SendMessage_SendTextMsg_0(ctx context.Context, marshaler runtime.Marshaler, server SendMessageServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq TextMessage
+	var protoReq TextMessageRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -66,7 +66,7 @@ func local_request_SendMessage_SendTextMsg_0(ctx context.Context, marshaler runt
 }
 
 func request_SendMessage_SendMarkdownMsg_0(ctx context.Context, marshaler runtime.Marshaler, client SendMessageClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MarkdownMessage
+	var protoReq MarkdownMessageRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -83,7 +83,7 @@ func request_SendMessage_SendMarkdownMsg_0(ctx context.Context, marshaler runtim
 }
 
 func local_request_SendMessage_SendMarkdownMsg_0(ctx context.Context, marshaler runtime.Marshaler, server SendMessageServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MarkdownMessage
+	var protoReq MarkdownMessageRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

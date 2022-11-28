@@ -28,6 +28,14 @@
         }
       }
     },
+    "NoticeType": {
+      "type": "string",
+      "enum": [
+        "Alarm",
+        "Notice"
+      ],
+      "default": "Alarm"
+    },
     "Response": {
       "type": "object",
       "properties": {

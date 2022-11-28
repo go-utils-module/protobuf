@@ -18,8 +18,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SendMessageClient interface {
-	SendTextMsg(ctx context.Context, in *TextMessage, opts ...grpc.CallOption) (*Response, error)
-	SendMarkdownMsg(ctx context.Context, in *MarkdownMessage, opts ...grpc.CallOption) (*Response, error)
+	SendTextMsg(ctx context.Context, in *TextMessageRequest, opts ...grpc.CallOption) (*Response, error)
+	SendMarkdownMsg(ctx context.Context, in *MarkdownMessageRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type sendMessageClient struct {
@@ -30,7 +30,7 @@ func NewSendMessageClient(cc grpc.ClientConnInterface) SendMessageClient {
 	return &sendMessageClient{cc}
 }
 
-func (c *sendMessageClient) SendTextMsg(ctx context.Context, in *TextMessage, opts ...grpc.CallOption) (*Response, error) {
+func (c *sendMessageClient) SendTextMsg(ctx context.Context, in *TextMessageRequest, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
 	err := c.cc.Invoke(ctx, "/SendMessage/SendTextMsg", in, out, opts...)
 	if err != nil {
@@ -39,7 +39,7 @@ func (c *sendMessageClient) SendTextMsg(ctx context.Context, in *TextMessage, op
 	return out, nil
 }
 
-func (c *sendMessageClient) SendMarkdownMsg(ctx context.Context, in *MarkdownMessage, opts ...grpc.CallOption) (*Response, error) {
+func (c *sendMessageClient) SendMarkdownMsg(ctx context.Context, in *MarkdownMessageRequest, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
 	err := c.cc.Invoke(ctx, "/SendMessage/SendMarkdownMsg", in, out, opts...)
 	if err != nil {
@@ -52,8 +52,8 @@ func (c *sendMessageClient) SendMarkdownMsg(ctx context.Context, in *MarkdownMes
 // All implementations must embed UnimplementedSendMessageServer
 // for forward compatibility
 type SendMessageServer interface {
-	SendTextMsg(context.Context, *TextMessage) (*Response, error)
-	SendMarkdownMsg(context.Context, *MarkdownMessage) (*Response, error)
+	SendTextMsg(context.Context, *TextMessageRequest) (*Response, error)
+	SendMarkdownMsg(context.Context, *MarkdownMessageRequest) (*Response, error)
 	mustEmbedUnimplementedSendMessageServer()
 }
 
@@ -61,10 +61,10 @@ type SendMessageServer interface {
 type UnimplementedSendMessageServer struct {
 }
 
-func (UnimplementedSendMessageServer) SendTextMsg(context.Context, *TextMessage) (*Response, error) {
+func (UnimplementedSendMessageServer) SendTextMsg(context.Context, *TextMessageRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendTextMsg not implemented")
 }
-func (UnimplementedSendMessageServer) SendMarkdownMsg(context.Context, *MarkdownMessage) (*Response, error) {
+func (UnimplementedSendMessageServer) SendMarkdownMsg(context.Context, *MarkdownMessageRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMarkdownMsg not implemented")
 }
 func (UnimplementedSendMessageServer) mustEmbedUnimplementedSendMessageServer() {}
@@ -81,7 +81,7 @@ func RegisterSendMessageServer(s grpc.ServiceRegistrar, srv SendMessageServer) {
 }
 
 func _SendMessage_SendTextMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TextMessage)
+	in := new(TextMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -93,13 +93,13 @@ func _SendMessage_SendTextMsg_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/SendMessage/SendTextMsg",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendMessageServer).SendTextMsg(ctx, req.(*TextMessage))
+		return srv.(SendMessageServer).SendTextMsg(ctx, req.(*TextMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _SendMessage_SendMarkdownMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MarkdownMessage)
+	in := new(MarkdownMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func _SendMessage_SendMarkdownMsg_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/SendMessage/SendMarkdownMsg",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendMessageServer).SendMarkdownMsg(ctx, req.(*MarkdownMessage))
+		return srv.(SendMessageServer).SendMarkdownMsg(ctx, req.(*MarkdownMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

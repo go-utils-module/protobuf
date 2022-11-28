@@ -1,20 +1,25 @@
 syntax = "proto3";
-
 option go_package = "./proto;notification";
+
+enum MessageType {// 定义枚举类型，生成消息类型
+  Text = 0 ;
+  Markdown = 1;
+}
+
 //消息服务
 service SendMessage{
-  rpc SendTextMsg(TextMessage) returns (Response) {}
-  rpc SendMarkdownMsg(MarkdownMessage) returns (Response) {}
+  rpc SendTextMsg(TextMessageRequest) returns (Response) {}
+  rpc SendMarkdownMsg(MarkdownMessageRequest) returns (Response) {}
 }
 
-message TextMessage{
-  string MsgType = 1;
-  TextMsgContent Markdown = 2;
+message TextMessageRequest{
+  TextMsgContent TextMsgContent = 2;
+  NoticeType NoticeType = 3;
 }
 
-message MarkdownMessage{
-  string MsgType = 1;
+message MarkdownMessageRequest{
   MarkdownMsgContent MarkdownMsgContent = 2;
+  NoticeType NoticeType = 3;
 }
 
 message MarkdownMsgContent{
@@ -30,4 +35,9 @@ message Response{
   int64 Code = 1;
   string Message = 2;
   string Data = 3;
+}
+
+enum NoticeType {
+  Alarm = 0;
+  Notice = 1;
 }
