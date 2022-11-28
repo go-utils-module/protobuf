@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "./proto;console";
+//消息服务
+service SendMessage{
+  rpc SendTextMsg(TextMessage) returns (Response) {}
+  rpc SendMarkdownMsg(MarkdownMessage) returns (Response) {}
+}
+
+message TextMessage{
+  string MsgType = 1;
+  TextMsgContent Markdown = 2;
+}
+
+message MarkdownMessage{
+  string MsgType = 1;
+  MarkdownMsgContent MarkdownMsgContent = 2;
+}
+
+message MarkdownMsgContent{
+  string Title = 1;
+  string Text = 2;
+}
+
+message TextMsgContent{
+  string Content = 1;
+}
+
+message Response{
+  int64 Code = 1;
+  string Message = 2;
+  string Data = 3;
+}
